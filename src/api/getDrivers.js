@@ -3,7 +3,7 @@ import {  fetchDriversError, fetchDriversPending, fetchDriversSuccess } from "..
 function fetchDrivers(query) {
     return function (dispatch) {
         dispatch(fetchDriversPending());
-        fetch(`http://ergast.com/api/f1/drivers.json?limit=10&offset=${query}`)
+        fetch(`https://ergast.com/api/f1/drivers.json?limit=10&offset=${query}`)
             .then(res => res.json())
             .then(data => {
                 dispatch(fetchDriversSuccess(data.MRData))
