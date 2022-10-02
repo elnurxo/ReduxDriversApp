@@ -14,7 +14,7 @@ code {
 
 .container{
   padding: 4rem;
-  width: 70%;
+  width: 80%;
   margin: auto;
 }
 .sup{
@@ -67,4 +67,14 @@ ul{
   margin: auto;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   cursor:not-allowed;
+}
+@media screen and (max-width: 992px) {
+  .container{
+    width: 100vw;
+    padding: 14px;
+    margin: auto;
+  }
+  .pagination-container{
+    width: 100%;
+  }
 }
