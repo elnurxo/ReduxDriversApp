@@ -1,12 +1,12 @@
 import {  fetchDriversError, fetchDriversPending, fetchDriversSuccess } from "../redux/actions/drivers.actions";
 
-function fetchDrivers() {
+function fetchDrivers(query) {
     return function (dispatch) {
         dispatch(fetchDriversPending());
-        fetch('http://ergast.com/api/f1/drivers.json')
+        fetch(`http://ergast.com/api/f1/drivers.json?limit=10&offset=${query}`)
             .then(res => res.json())
             .then(data => {
-                dispatch(fetchDriversSuccess(data.MRData.DriverTable.Drivers))
+                dispatch(fetchDriversSuccess(data.MRData))
                 return data;
             })
             .catch(error => {

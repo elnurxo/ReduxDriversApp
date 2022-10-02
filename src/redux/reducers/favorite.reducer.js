@@ -1,15 +1,16 @@
 export const favoriteReducer = (state = [], action) => {
+  switch (action.type) {
+    case "ADD_TO_FAVORITE":
+      return [...state, action.payload];
 
+    case "EMPTY_FAVORITE":
+      return [];
 
-    switch (action.type) {
-        case "ADD_TO_FAVORITE":
-            return [...state, action.payload]
+    case "REMOVE_FROM_FAVORITE":
+    const updateState = state.filter(data => data.driverId !== action.payload.driverId)
+    return [...updateState]
 
-        case "EMPTY_FAVORITE":
-            return []
-
-        default:
-            return state;
-    }
-
-}
+    default:
+      return state;
+  }
+};

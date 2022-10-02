@@ -14,6 +14,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import '../App.css';
+import { useSelector } from "react-redux";
 
 const drawerWidth = 240;
 
@@ -59,6 +60,9 @@ function Header(props) {
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
+
+  const favorites = useSelector((state) => state.favoriteReducer);
+  
   return (
     <Box sx={{ display: "flex",marginBottom:'80px' }}>
     <AppBar
@@ -99,7 +103,7 @@ function Header(props) {
             <Button className="link" sx={{ color: "#fff" }}>Drivers</Button>
           </Link>
           <Link to="favorites">
-            <Button className="link" sx={{ color: "#fff" }}>Favorites</Button>
+            <Button className="link" sx={{ color: "#fff" }}>Favorites <sup className="sup"> {favorites.length}</sup></Button>
           </Link>
         </Box>
       </Toolbar>
