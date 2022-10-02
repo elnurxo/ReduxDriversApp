@@ -21,10 +21,17 @@ function Drivers() {
     fetchDrivers()(dispatch);
   }, [dispatch]);
 
+  
+  const favorites = useSelector((state) => state.favoriteReducer);
   //add to favorite
   const add = (item) => {
-    dispatch({ type: "ADD_TO_FAVORITE", payload: item });
-    notify();
+    if (!favorites.find((x)=>x.driverId===item.driverId)) {
+      dispatch({ type: "ADD_TO_FAVORITE", payload: item });
+      notify();
+    }
+    else{
+      notifyError();
+    }
   };
 
   if (error) {
@@ -56,6 +63,16 @@ function Drivers() {
             secondary: 'black',
         }
     });
+};
+const notifyError = () => {
+  toast.error('This driver is already added to favorites!',{
+      duration: 2000,
+      position: "bottom-right",
+      theme: {
+          primary: 'green',
+          secondary: 'black',
+      }
+  });
 };
   return (
     <div className="container">
@@ -90,7 +107,12 @@ function Drivers() {
                 <TableCell align="right">{driver.nationality}</TableCell>
                 <TableCell align="right">{driver.dateOfBirth}</TableCell>
                 <TableCell align="right"><a style={{color:'black',fontWeight:'bold',textDecoration:'underline'}} target="_blank" rel="noreferrer" href={`${driver.url}`}>Biography</a></TableCell>
-                <TableCell align="right"><Button onClick={()=>add(driver)} variant="contained">Favorite</Button></TableCell>
+                <TableCell align="right">
+                <Button
+                style={{backgroundColor: favorites.find((x)=>x.driverId===driver.driverId)===undefined ? '':'green'}}
+                onClick={()=>add(driver)} variant="contained">
+                  {(favorites.find((x)=>x.driverId===driver.driverId)===undefined ? 'Add': 'Added')}
+                </Button></TableCell>
               </TableRow>
             ))}
           </TableBody>

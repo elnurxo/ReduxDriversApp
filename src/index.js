@@ -15,10 +15,8 @@ const universityStore = createStore(reducers, applyMiddleware(thunk));
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={universityStore}>
-    <React.StrictMode>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </React.StrictMode>
   </Provider>
 );
